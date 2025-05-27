@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   {% load static %}
+
+  <style>
+    body {
+      background-image: url('/static/images/img4.jpg');     
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2 class="text-center mb-4">Login</h2>
+    <form action="{% url 'loginfun' %}" method="POST">
+      {% csrf_token %}
+      <input type="text" name="usname" class="form-control mb-3" placeholder="Username" required>
+      <input type="password" name="passd" class="form-control mb-3" placeholder="Password" required>
+      <button type="submit" class="btn btn-primary w-100">Log In</button>
+    </form>
+
+    <!-- {% for msg in messages %}
+      <div class="alert alert-danger mt-3">{{ msg }}</div>
+    {% endfor %} -->
+
+          {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-3" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+    <p class="text-center mt-3">Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+  </div>
+  {% if redirect %}
+  <script>
+    setTimeout(function() {
+      window.location.href = "{% url redirect %}";
+    }, 3000); // Wait 3 seconds
+  </script>
+{% endif %}
+</body>
+</html>

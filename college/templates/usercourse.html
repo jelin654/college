@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  {% load static %}
+  <style>
+    body {
+  background-image: url("{% static 'images/img3.jpg' %}");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+}
+    /* Navbar styling */
+    .navbar {
+      background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+      /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); */
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #fff !important;
+      letter-spacing: 1.5px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar-nav .nav-link {
+      color: #ddd !important;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+      color: #fff !important;
+      /* text-shadow: 0 0 8px #ffffffaa; */
+    }
+
+    /* Dropdown menu styling */
+    .dropdown-menu {
+      background: #283e51;
+      border-radius: 8px;
+      border: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .dropdown-menu .dropdown-item {
+      color: #ddd;
+      font-weight: 500;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .dropdown-menu .dropdown-item:hover,
+    .dropdown-menu .dropdown-item:focus {
+      background-color: #4b6cb7;
+      color: #fff;
+    }
+
+    /* Container for content */
+    /* .container.mt-4 {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      min-height: 70vh;
+    } */
+
+    /* Footer styling (optional if you add footer) */
+    /* footer {
+      text-align: center;
+      padding: 20px 0;
+      background: #182848;
+      color: #fff;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    } */
+
+    .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            /* background-color: #f9f9f9; */
+            /* border-radius: 8px; */
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+        }
+
+        /* Heading Styling */
+        h1 {
+            text-align: center;
+            color: #333;
+            /* font-size: 28px;
+            margin-bottom: 20px; */
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4c9cf2;
+            color: white;
+        }
+/* 
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        } */
+
+        tr:hover {
+            background-color: #e9e9e9;
+        }
+
+        /* Button Styling */
+        button {
+            padding: 6px 12px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .edit-btn {
+            background-color: #28a745;
+        }
+
+        .edit-btn:hover {
+            background-color: #218838;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">College</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <!-- Courses dropdown -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Course
+            </a>
+            <ul class="dropdown-menu">
+              <!-- <li><a class="dropdown-item" href="{% url 'addcourse' %}">Add Course</a></li> -->
+              <li><a class="dropdown-item" href="{% url 'usercourse' %}">Show Courses</a></li>
+            </ul>
+          </li>
+
+          <!-- Students dropdown -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Students
+            </a>
+            <ul class="dropdown-menu">
+              <!-- <li><a class="dropdown-item" href="{% url 'addstudent' %}">Add Student</a></li> -->
+              <li><a class="dropdown-item" href="{% url 'userstudent' %}">Show Student</a></li>
+            </ul>
+          </li>
+
+          <!-- Teachers dropdown -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Teachers
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'teacherprofile' %}">My Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'showteacher' %}">Show Teachers</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+  <li class="nav-item">
+    <a class="nav-link text-white" href="{% url 'logoutfun' %}">Logout</a>
+  </li>
+</ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+   <div class="container">
+    <h1>Course Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Fees</th>
+                <!-- <th>Edit</th>
+                <th>Delete</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in courses %}
+            <tr>
+                <td>{{ c.coursename }}</td>
+                <td>{{ c.fees }}</td>
+                <!-- <td><button class="edit-btn"><a href="{% url 'editcourse' c.id %}">Edit</a></button></td>
+                <td><button class="delete-btn"><a href="{% url 'deletecourse' c.id %}">Delete</a></button></td> -->
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No courses found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+  <!-- Bootstrap JS + Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

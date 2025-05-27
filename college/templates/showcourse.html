@@ -1,0 +1,133 @@
+
+    {% extends "home.html" %}
+
+{% block title %}Show Course{% endblock %}
+
+{% block content %}
+<style>
+    /* Container */
+    /* .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #fefefe;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    } */
+
+    /* Heading */
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        font-weight: 700;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #ffffff;
+    }
+
+    thead tr {
+        background-color: #007bff;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    th, td {
+        padding: 15px 20px;
+        text-align: center;
+        border-bottom: 1px solid #e1e1e1;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f8ff;
+        cursor: pointer;
+    }
+
+    /* Buttons */
+    button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    button a {
+        color: white;
+        text-decoration: none;
+        display: block;
+    }
+
+    .edit-btn {
+        background-color: #28a745;
+    }
+
+    .edit-btn:hover {
+        background-color: #218838;
+    }
+
+    .delete-btn {
+        background-color: #dc3545;
+    }
+
+    .delete-btn:hover {
+        background-color: #c82333;
+    }
+
+    /* Responsive for smaller devices */
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+
+        th, td {
+            padding: 10px 8px;
+            font-size: 13px;
+        }
+
+        button {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+    }
+</style>
+
+<div class="container">
+    <h1>Course Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Fees</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in courses %}
+            <tr>
+                <td>{{ c.coursename }}</td>
+                <td>{{ c.fees }}</td>
+                <td><button class="edit-btn"><a href="{% url 'editcourse' c.id %}">Edit</a></button></td>
+                <td><button class="delete-btn"><a href="{% url 'deletecourse' c.id %}">Delete</a></button></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No courses found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

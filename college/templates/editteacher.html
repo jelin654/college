@@ -1,0 +1,79 @@
+{% extends "home.html" %}
+
+{% block title %}Edit Teacher{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header text-white bg-primary">Edit Teacher</div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'editteacherdet' te.id %}">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label>Age</label>
+                            <input type="number" name="age" class="form-control" value="{{ te.age }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Address</label>
+                            <input type="text" name="address" class="form-control" value="{{ te.address }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Phone</label>
+                            <input type="text" name="phone" class="form-control" value="{{ te.phone }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Image</label><br>
+                            {% if te.image %}
+                                <img src="{{ te.image.url }}" width="80"><br>
+                            {% endif %}
+                            <input type="file" name="image" class="form-control mt-2">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Course</label>
+                            <select name="coursename" class="form-select">
+                                {% for c in courses %}
+                                    <option value="{{ c.id }}" {% if c.id == te.course.id %}selected{% endif %}>{{ c.coursename }}</option>
+                                {% endfor %}
+                            </select>
+                            
+                        </div>
+
+                        <div class="mb-3">
+                            <label>User</label>
+                            <select name="user" class="form-select" >
+                                {% for u in users %}
+                                    <option value="{{ u.id }}" {% if u.id == te.user.id %}selected{% endif %}>{{ u.username }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Update Teacher</button>
+                        <a href="{% url 'showteacher' %}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const selectedValue = "{{ c.id }}";  // The selected course's ID as string
+    const dropdown = document.getElementById('user');  // The <select> element
+    
+    for (let option of dropdown.options) {
+      if (option.value === selectedValue) {
+        option.style.display = 'none';  // Hide the selected option from the dropdown list
+        break;  // Stop after hiding the first match
+      }
+    }
+  });
+</script>
+
+{% endblock %}
